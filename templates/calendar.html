@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar App Vanilla JS</title>
+
+    <link rel="stylesheet" href="../static/css/calendar.css">
+    <link rel="stylesheet" href="../static/css/hamburger.css">
+    <link rel="stylesheet" href="../static/css/dropdown.css">
+    <link rel="stylesheet" href="../static/css/button.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  </head>
+  <body>
+
+    <div id = "trashArea">
+      <img src="" id="trashCan">
+    </div>
+      
+
+    <div id="container">
+      <div id="header">
+        <!-- 月の表示が行われるコンテナ -->
+        <div id="monthDisplay"></div>
+        <!-- BackとNextのボタンを表示 -->
+        <div>
+          <button id="backButton">前月</button>
+          <button id="nextButton">翌月</button>
+        </div>
+      </div>
+
+      <!-- 曜日を表示するコンテナ -->
+      <div id="weekdays">
+        <!-- 各曜日を表示 -->
+        <div id="Sun">日曜日</div>
+        <div>月曜日</div>
+        <div>火曜日</div>
+        <div>水曜日</div>
+        <div>木曜日</div>
+        <div>金曜日</div>
+        <div id="Sat">土曜日</div>
+      </div>
+
+      <!-- カレンダーの日付を表示するコンテナ -->
+      <div id="calendar">
+      </div>
+    </div>
+
+    <!-- ↓↓↓教科を編集する用のモーダル -->
+    <div id="newEventModal">
+
+      <span id="バツ2" onclick="closeModal()"></span>
+      <br>
+      <div id="stickyNote">
+        <div id="editText">ここに教科がある日付、学年、教科の時限が表示される</div>
+        <div id="eventTitleInput" placeholder="教科名" contenteditable></div>
+      </div>
+
+      <div class="boxForbuttons">
+        <input class="colorPicker" id="color1_edit" value="#ffff00" type="color" list="color-picker" onchange="buttonColorChange1()">
+        <button class="changeColorButton" id="BGC" onclick="colorChanged1()">
+          <span id="BGbutton_edit" style="background-color: #ffff00">背景色</span>
+        </button>
+      </div>
+
+      <div class="boxForbuttons">
+        <input class="colorPicker" id="color2_edit" value="#ff0000" type="color" list="color-picker" onchange="buttonColorChange2()">
+        <button class="changeColorButton" id="TextC" onclick="colorChanged2()">
+          <span id="Textbutton_edit" style="color: #ff0000">文字色</span>
+        </button>
+      </div>
+
+      <div class="boxForbuttons" style="vertical-align: top;">
+        <select id="sizing_edit" style="width: 52px; height: 27px;"></select> <!--js側でoptionを5~50まで追加する-->
+        <button class="changeColorButton" id="textSize_edit" onclick="sizeChanged()">
+          <span>大きさ</span>
+        </button>
+      </div>
+
+      <div class="boxForbuttons"  style="width: 73px; vertical-align:top;">
+        <select class="fontTypesStyle" id="fontTypes_edit" onchange="butttonFontChange()">
+          <option value="ゴシック体" style="font-family: sans-serif">ゴシック体</option>
+          <option value="明朝体" style="font-family: serif">明朝体</option>
+          <option value="system-ui" style="font-family: system-ui">system-ui</option>
+          <option value="UD デジタル 教科書体 N-B" style="font-family: UD デジタル 教科書体 N-B">UD デジタル 教科書体 N-B</option>
+        </select>
+        <br>
+        <button class="selectFont" id="changeFontButton_edit" onclick="fontChanged()">
+          <span id="fontbutton_edit">フォント</span>
+        </button>
+      </div>
+
+      <div class="boxForbuttons_subjColor">
+        <input class="colorPicker" id="color3_edit" value="#ffff7f" type="color" list="color-picker" onchange="buttonColorChange3()">
+        <button class="changeColorButton" id="SubjColor_edit" style="background-color: #ffff7f; margin-top: 3px;"  onclick="colorChanged3()">
+          <span id="changeSubjColor_edit">教科色</span>
+        </button>
+        <button class="changeColorButton" id="makeTransparent_edit" style="background-color: transparent" onclick="makeTransparent()">
+          <span>透明</span>
+        </button>
+      </div>
+
+      <div class="boxForbuttons_others">
+        <button class="BIU" onclick="applyBold()">
+          <span style="font-weight: bold;">B</span>
+        </button>
+        <button class="BIU" onclick="applyItalic()">
+          <span>I</span>
+        </button>
+        <button class="BIU" onclick="applyUnderline()">
+          <span style="text-decoration: underline">U</span>
+        </button>
+        <button id="removeFormatButton" onclick="document.execCommand('removeFormat');">書式削除</button>
+      </div>
+
+      <a class="btn btn-border" id="保存" onclick="saveEvent()"><span>保存</span></a>
+
+    </div>
+    <!-- ↑↑↑教科を編集する用のモーダル -->
+
+    <!-- ↓↓↓教科を追加する用のモーダル -->
+    <div id="modalToAddSubj" style="display: none">
+
+      <div class="dropdown">
+        <div class="select">
+          <span>教科を選択</span>
+          <i class="fa fa-chevron-left"></i>
+        </div>
+        <input type="hidden">
+        <ul class="dropdown-menu">
+          <li id="add1">1時限分の教科</li>
+          <li id="add2">2時限分の教科</li>
+          <li id="addHoli">holiday</li>
+        </ul>
+      </div>
+      <span class="msg"></span>
+      <span id="バツ" onclick="closeModalToAddSubj()"></span>
+      <div id="textareaParent">
+        <div id="textarea" placeholder="教科名" contenteditable></div>
+      </div>
+      
+      <div class="boxForbuttons">
+        <input class="colorPicker" id="color1" value="#ffff00" type="color" list="color-picker" onchange="buttonColorChange1()">
+        <button class="changeColorButton" id="BGC" value="#ffff00" onclick="colorChanged1(BGbutton)">
+          <span id="BGbutton" style="background-color: #ffff00">背景色</span>
+        </button>
+      </div>
+
+      <div class="boxForbuttons">
+        <input class="colorPicker" id="color2" value="#ff0000" type="color" list="color-picker" onchange="buttonColorChange2()">
+        <button class="changeColorButton" id="TextC" onclick="colorChanged2()">
+          <span id="Textbutton" style="color: #ff0000">文字色</span>
+        </button>
+      </div>
+
+      <div class="boxForbuttons"  style="vertical-align: top;">
+        <select id="sizing" style="width: 52px; height: 27px;"></select> <!--js側でoptionを5~50まで追加する-->
+        <button class="changeColorButton" id="textSize" onclick="sizeChanged()">
+          <span>大きさ</span>
+        </button>
+      </div>
+
+      <div class="boxForbuttons" style="width: 73px; vertical-align:top;">
+        <select class="fontTypesStyle" id="fontTypes" onchange="butttonFontChange()">
+          <option value="ゴシック体" style="font-family: sans-serif">ゴシック体</option>
+          <option value="明朝体" style="font-family: serif">明朝体</option>
+          <option value="system-ui" style="font-family: system-ui">system-ui</option>
+          <option value="UD デジタル 教科書体 N-B" style="font-family: UD デジタル 教科書体 N-B">UD デジタル 教科書体 N-B</option>
+        </select>
+        <br>
+        <button class="selectFont" id="changeFontButton" onclick="fontChanged()">
+          <span id="fontbutton">フォント</span>
+        </button>
+      </div>
+ 
+      <br>
+      <div class="boxForbuttons_subjColor">
+        <input class="colorPicker" id="color3" value="#ffff7f" type="color" list="color-picker" onchange="buttonColorChange3()">
+        <button class="changeColorButton" id="SubjColor" style="background-color: #ffff7f" onclick="colorChanged3()">
+          <span id="changeSubjColor">教科色</span>
+        </button>
+        <button class="changeColorButton" id="makeTransparent" style="background-color: transparent" onclick="makeTransparent()">
+          <span>透明</span>
+        </button>
+      </div>
+      <div class="boxForbuttons_others">
+        <button class="BIU" onclick="applyBold()">
+          <span style="font-weight: bold">B</span>
+        </button>
+        <button class="BIU" onclick="applyItalic()">
+          <span style="font-style: italic">I</span>
+        </button>
+        <button class="BIU" onclick="applyUnderline()">
+          <span style="text-decoration: underline">U</span>
+        </button>
+        <button id="removeFormatButton" onclick="document.execCommand('removeFormat');">書式削除</button>
+      </div>
+      <a class="btn btn-border" id="追加2" onclick="identifyFunction()"><span>追加</span></a>
+    </div>
+    <!-- ↑↑↑教科を追加する用のモーダル -->
+
+
+    <!-- 右クリックメニュー -->
+    <div id="contextmenu">
+      <ul>
+          <li id="menu1">削除</li>
+          <li id="menu2">編集</li>
+          <!-- <li id="menu3">この教科を複製</li> -->
+      </ul>
+    </div>
+
+
+    <div class="grid">
+      <button id="serverButton" onclick="sendToServer()">送信</button><br>
+      <button id="追加" onclick="openModalToAddSubj()">教科を追加する<br>👇</button><br>
+      <div id="box1">
+      </div><br>
+      <div id="box2"></div><br>
+      <div id="holidaaaay" class="holiday">
+        holiday<br>
+      </div><br>
+      <div id="tempDay" class="tempDay" draggable = "true">
+        templateDay<br>
+      </div>
+
+    </div>
+
+    <!--👇🍔👇　ハンバーガーメニュー-->
+    <div class="el_humburger">
+      <div class="el_humburger_wrapper">
+        <span class="el_humburger_bar top"></span>
+        <span class="el_humburger_bar middle"></span>
+        <span class="el_humburger_bar bottom"></span>
+      </div>
+    </div>
+
+    <header class="navi">
+      <div class="navi_inner">
+        <div class="navi_item" id="ハンバーガー1"></div>
+        <div class="navi_item" id="ハンバーガー2"></div>
+        <div id="navi_selecter" id="ハンバーガー3">
+          <div class="form-select-wrap">
+            <select class="selectYear">
+            </select>
+            / 
+            <select class="selectMonth">
+            </select>
+            <!-- /
+            <select class="selectDay">
+            </select> -->
+          </div>
+        </div>
+      </div>
+    </header>
+    <!--👆🍔👆 -->
+
+      
+    <!-- モーダルが表示された際に背後を覆う半透明な背景 -->
+    <div id="modalBackDrop"></div>
+    
+    <script src="../static/js/calendar.js"></script>
+    <script src="../static/js/hamburger.js"></script>
+    <script src="../static/js/dropdown.js"></script>
+    <script src="../static/js/format.js"></script>
+    <script src="../static/js/SelectYrMonthD8.js"></script>
+
+
+  </body>
+</html>

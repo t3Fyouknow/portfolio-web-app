@@ -1,0 +1,688 @@
+
+body {
+  display: flex;
+  margin-top: 50px;
+  justify-content: center;
+  background-color: #FFFCFF;
+}
+
+button{
+  width: 75px;
+  cursor: pointer;
+  box-shadow: 0px 0px 2px gray;
+  border: none;
+  outline: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+}
+
+#header {
+  padding: 10px;
+  color: #d36c6c;
+  font-size: 26px;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: space-between;
+}
+#header button {
+  background-color:#92a1d1;
+}
+#container {
+width: 1270px;/*元は770*/
+}
+#weekdays {
+  width: 100%;
+  display: flex;
+  color: #247BA0;
+}
+  /* #weekdays IDを持つ要素内の子要素である div 要素に対するスタイルを指定しています。width: 100px; は各曜日セルの幅を指定し、padding: 10px; はセル内の余白を指定しています。 */
+#weekdays div {
+  width: 160px;
+  padding: 10px;
+}
+#calendar {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.day {
+  width: 100px;
+  width: 170px;
+  padding: 5px;
+  height: 150px;
+  cursor: pointer;
+  box-sizing: border-box;
+  background-color: white;
+  margin: 5px;
+  box-shadow: 0px 0px 3px #CBD4C2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  display: inline-block;
+}
+
+
+.day:hover {
+  background-color: #e8faed;
+}
+
+.currentDay{
+  box-shadow: 0px 0px 6px royalblue;
+}
+
+.event {
+  font-size: 10px;
+  padding: 3px;
+  background-color: #58bae4;
+  color: white;
+  border-radius: 5px;
+  max-height: 55px;
+  overflow: hidden;
+}
+
+
+.padding {
+  width: 170px;
+  padding: 5px;
+  height: 150px;
+  cursor: default !important;
+  background-color: #FFFCFF !important;
+  box-shadow: none !important;
+}
+
+.fade{
+  background-color:#f5f5f5;
+}
+
+/* 教科編集用のモーダル */
+#newEventModal{
+  display: none;
+  z-index: 21;
+  padding: 20px;
+  background-color:#CFD8DC;
+  box-shadow: 0px 0px 3px black;
+  border-radius: 5px;
+  width: 350px;
+  height: 400px;
+  top: 200px;
+  left: calc(50% - 175px);
+  position: absolute;
+  font-family: sans-serif;
+}
+
+/* 教科作成用のモーダル */
+#modalToAddSubj{
+  display: none;
+  z-index: 20;
+  padding: 20px;
+  background-color: gold;
+  box-shadow: 0px 0px 3px black;
+  border-radius: 5px;
+  width: 350px;
+  height: 400px;
+  top: 200px;
+  left: calc(50% - 175px);
+  position: absolute;
+  font-family: sans-serif;
+}
+
+#eventTitleInput {
+  font-family: 'Ms ゴシック', 'Osaka-等幅';
+  margin: auto;
+  resize: none;
+  width: 50px;
+  height: 60px;
+  border: 1px solid rgb(0, 0, 0);
+  font-size:10pt;
+  /*↓行間指定*/
+  line-height: 13px;
+  /*↓中央寄せ*/
+  text-align: center;
+  overflow: hidden;
+  background-color: white;
+}
+
+/* ↓太字 */
+.format{
+  width: 30px;
+  height: 30px;
+  margin-top: 10px;
+  color:black;
+  background-color: #fff;
+}
+
+#removeFormatButton{
+  width: 123px;
+  height: 30px;
+  color:#fff;
+  background-color: #000;
+  margin: auto;
+}
+
+#バツ {
+  margin-right: 20px;
+  display: inline-block;
+  position: absolute;right:0;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #333; /* 枠の調整 */
+  border-radius: 26%;  /* 丸みの度合い */
+  background: white; /* ボタンの背景色 */
+  margin-left: 180px;
+}
+ 
+#バツ::before, #バツ::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3px; /* 棒の幅（太さ） */
+  height: 22px; /* 棒の高さ */
+  background: #333; /* バツ印の色 */
+}
+ 
+#バツ::before {
+  transform: translate(-50%,-50%) rotate(45deg);
+}
+ 
+#バツ::after {
+  transform: translate(-50%,-50%) rotate(-45deg);
+}
+
+#バツ:hover { /* マウスオーバー時のスタイル */
+  background-color: gainsboro;
+}
+
+#バツ2 {
+  display: inline-block;
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #333; /* 枠の調整 */
+  border-radius: 26%;  /* 丸みの度合い */
+  background: white; /* ボタンの背景色 */
+  margin-left: 317px;
+}
+ 
+#バツ2::before, #バツ2::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3px; /* 棒の幅（太さ） */
+  height: 22px; /* 棒の高さ */
+  background: #333; /* バツ印の色 */
+}
+ 
+#バツ2::before {
+  transform: translate(-50%,-50%) rotate(45deg);
+}
+ 
+#バツ2::after {
+  transform: translate(-50%,-50%) rotate(-45deg);
+}
+
+#バツ2:hover { /* マウスオーバー時のスタイル */
+  background-color: gainsboro;
+}
+
+.boxForbuttons {
+  display: inline-block;
+	padding: 0.8em;/*内側余白*/
+	border-top:solid 5px #263238;/*線の種類・太さ・色*/
+	background-color:#f5f5f5;/*背景色*/
+	box-shadow:3px 1px 4px rgba(0, 0, 0, 0.2);/*ボックス影*/
+  width:52.5px;
+  height: 63px;
+}
+
+.boxForbuttons_subjColor{
+  display: inline-block;
+	padding: 0.8em;/*内側余白*/
+	border-top:solid 5px #263238;/*線の種類・太さ・色*/
+	background-color:#f5f5f5;/*背景色*/
+	box-shadow:3px 1px 4px rgba(0, 0, 0, 0.2);/*ボックス影*/
+  width:52.5px;
+  height: 88px;
+  margin-top: 5px;
+  padding-top: 5px;
+}
+
+.boxForbuttons_others {
+  display: inline-flex;
+  flex-wrap: wrap;
+	padding: 0.8em;/*内側余白*/
+	border-top:solid 5px #263238;/*線の種類・太さ・色*/
+	background-color:#f5f5f5;/*背景色*/
+	box-shadow:3px 1px 4px rgba(0, 0, 0, 0.2);/*ボックス影*/
+  width: 138px;
+  height: 80px; 
+  margin-top: 5px; 
+  vertical-align:top;
+}
+
+.colorPicker{
+  width: 52px;
+}
+
+.changeColorButton{
+  width: 52px;
+  height: 30px;
+  /* margin-top: 10px; */
+  padding: 0px;
+  color: black;
+  background-color: #fff;
+  margin-top: 5px;
+}
+
+.selectFont{
+  position: absolute;
+  width: 73px;
+  height: 30px;
+  margin-top: 5px;
+  color: black;
+  background-color: #fff;
+}
+
+.fontTypesStyle{
+  display: inline-block;
+  width: 73px;
+  height: 27px;
+}
+
+.BIU{
+  margin: 0.6em;
+  width: 30px;
+  height: 30px;
+  background-color: black;
+  margin-top: 0.65px;
+}
+
+#input.error{
+  border: 2px solid red;
+}
+
+#cancelButton, #deleteButton {
+  background-color: #d36c6c;
+}
+#saveButton, #closeButton {
+  background-color: #92a1d1;
+}
+
+/* #eventText IDを持つ要素のテキストのフォントサイズを指定しています。 */
+#eventText {
+  font-size: 14px;
+}
+
+#stickyNote{
+	margin-bottom: 5px;
+	background-color: #263238;/*ボックス背景色*/
+	position:relative;/*配置(ここを基準に)*/
+  height: 150px;
+  padding:0.1px;
+  display: flex;
+	/*padding:2.5em 2em 2em;*/ /*元のpadding*/
+}
+
+#editText{
+	background-color: gold;
+	border-left: 2px dotted rgba(0,0,0,.4);/* テープのギザギザ左*/
+	border-right: 2px dotted rgba(0,0,0,.4);/* テープのギザギザ右*/
+	transform: rotate(-6deg);/*テープの傾き*/
+	font-size: 1em;/*タイトル文字の大きさ*/
+	padding: 10px 20px;/*タイトルの余白*/
+	line-height: 1;/*タイトルの行の高さ*/
+	position:absolute;	/*配置(ここを動かす)*/
+	top: -35px; /*上から（-10px）移動*/
+	left: 20px; /*左から(20px)移動*/
+}
+
+#modalBackDrop{
+  display: none;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-color: rgba(0,0,0,0.8);
+}
+
+#trashCan{
+  padding-top: 300px;
+}
+
+#trashArea{
+  background-color:#FFFCFF;
+  width: 256px;
+}
+
+
+#contextmenu{
+  display:none;
+  position:fixed;
+  left:0px;
+  top:0px;
+  width:100px;
+  height:75px;
+  border:1px solid #000;
+  background-color:#fff;
+  z-index: 13;
+  cursor:pointer;
+}
+
+#menu1{
+  text-decoration: none;
+}
+#menu1:hover{
+  text-decoration: underline;
+}
+#menu2{
+  text-decoration: none;
+}
+#menu2:hover{
+  text-decoration: underline;
+}
+
+#textareaParent{
+	margin: 0.5em auto;
+	position: relative;
+	padding:0.1px;
+	z-index: 0;
+	background-color:#263238;/*背景色*/
+  height: 140px;
+  display: flex;
+}
+
+#textareaParent:before{
+	position: absolute;
+	border: 2px dashed #fff;/*破線の太さ・色*/
+	content: '';
+	display: block;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	margin:5px;
+	z-index: -1;
+	border-radius:3px;
+}
+
+
+#textarea {
+  display: none;
+  font-family: 'Ms ゴシック', 'Osaka-等幅';
+  margin: auto;
+  resize: none;
+  width: 50px;
+  height: 60px;
+  border: 1px solid rgb(0, 0, 0);
+  background-color: white;
+  font-size:10pt;
+  /*↓行間指定*/
+  line-height: 13px;
+  /*↓中央寄せ*/
+  text-align: center;
+  overflow: hidden;
+}
+
+#追加{
+  margin-top: 55px;
+  margin-left: 5px;
+  width: 185px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  background-color: black;
+}
+
+#serverButton{
+  margin-left: 5px;
+  width: 185px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  background-color: black;
+}
+
+#box1 {
+  width: 185px;
+  height: 296px;
+  /* padding: 5px; */
+  cursor: pointer;
+  text-align: center;
+  box-sizing: border-box;
+  background-color: #c6c6ff;
+  margin: 5px;
+  box-shadow: 0px 0px 3px #CBD4C2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  display: inline-block;
+  border: 0.5px solid rgb(0, 0, 0);
+}
+
+.box1Location {
+  /* margin: 3.7px; */
+  margin: 3.7px 0px 0px 3.7px;
+  width: 36px;
+  height: 54px;
+  background-color: #f4eaff;
+  box-shadow: 0px 0px 3px black;
+  /*↓widthで指定した幅を超えたら改行*/
+  word-wrap: break-word;
+  /*↓行間指定*/
+  line-height: 13px;
+  /*↓中央寄せ*/
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#box2{
+  width: 185px;
+  height: 236px;
+  /* padding: 5px; */
+  cursor: pointer;
+  text-align: center;
+  box-sizing: border-box;
+  background-color: #ee82ee;
+  margin: 5px;
+  box-shadow: 0px 0px 3px #CBD4C2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  display: inline-block;
+  border: 0.5px solid rgb(0, 0, 0);
+}
+
+.box2Location {
+  /* margin: 3.7px; */
+  margin: 3.7px 0px 0px 3.7px;
+  width: 75.4px;
+  height: 54px;
+  background-color: #f4eaff;
+  box-shadow: 0px 0px 3px black;
+  /*↓widthで指定した幅を超えたら改行*/
+  word-wrap: break-word;
+  /*↓行間指定*/
+  line-height: 13px;
+  /*↓中央寄せ*/
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#holidaaaay{
+  width: 100px;
+  width: 170px;
+  padding: 5px;
+  height: 150px;
+  cursor: pointer;
+  box-sizing: border-box;
+  background-color: #b0c4de;
+  margin: 5px;
+  box-shadow: 0px 0px 3px #CBD4C2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  display: inline-block;
+}
+
+.holidayLocation{
+  margin: 2.7px;
+  width: 154.5px;
+  height: 109.7px;
+  background-color: white;
+  /*↓widthで指定した幅を超えたら改行*/
+  word-wrap: break-word;
+  /*↓行間指定*/
+  line-height: 13px;
+  /*↓中央寄せ*/
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#tempDay{
+  width: 100px;
+  width: 170px;
+  padding: 5px;
+  height: 150px;
+  cursor: pointer;
+  box-sizing: border-box;
+  background-color: darkgray;
+  margin: 5px;
+  box-shadow: 0px 0px 3px #CBD4C2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  display: inline-block;
+}
+
+#tempDay:hover {
+  background-color: #c0c0c0;
+}
+
+
+.item {
+  /* margin: 1px; */
+  width: 35px;
+  height: 53px;
+  border: 1px solid rgb(0, 0, 0);
+  font-size:8pt;
+  /*↓widthで指定した幅を超えたら改行*/
+  word-wrap: break-word;
+  /*↓行間指定*/
+  line-height: 13px;
+  /*↓中央寄せ*/
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden; /* 蛍光ペンのはみだしを隠す */
+}
+
+.bigItem{
+  width: 75.4px;
+  height: 53px;
+  border: 1px solid rgb(0, 0, 0);
+  font-size:8pt;
+  /*↓widthで指定した幅を超えたら改行*/
+  word-wrap: break-word;
+  /*↓行間指定*/
+  line-height: 13px;
+  /*↓中央寄せ*/
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+}
+
+.holidayItem{
+  width: 154.5px;
+  height: 109.7px;
+  border: 1px solid rgb(0, 0, 0);
+  font-size:8pt;
+  /*↓widthで指定した幅を超えたら改行*/
+  word-wrap: break-word;
+  /*↓行間指定*/
+  line-height: 13px;
+  /*↓中央寄せ*/
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+}
+
+.location{
+  margin: 1.7px;
+  width: 36px;
+  height: 54px;
+  background-color: white;
+  /*↓widthで指定した幅を超えたら改行*/
+  word-wrap: break-word;
+  /*↓行間指定*/
+  line-height: 13px;
+  /*↓中央寄せ*/
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.location:hover {
+  background-color: rgba(255, 255, 0, 0.3);
+}
+
+.fatParent {
+  width: 75.4px;
+}
+
+.hiddenPeriod{
+  display: none;
+  padding: 2px;
+  color: black;
+  border-radius: 5px;
+  width:100px;
+  top: 50px;
+  left: 0px;
+  font-size: 12px;
+  text-align: center;
+}
+
+
+/* ドラッグする前のブロックを薄く表示 */
+.dragging {
+  opacity: 0.5;
+}
+
+/* ドラッグしたとき背景の色を変える */
+.over {
+  background-color: rgba(255, 255, 0, 0.3);
+}
+
+.overForDay{
+  background-color: darkturquoise;
+}
+
+.form-select-wrap{
+  display: flex;
+  max-width: 300px;
+  align-items: center;
+}
+.form-select-wrap > select{
+  padding: 8px 16px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  font-size: 14px;
+}
