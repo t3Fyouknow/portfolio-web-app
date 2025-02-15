@@ -1,3 +1,5 @@
+//　参考：https://uhyohyo.net/javascript/8_1.html
+
 // 背景色のbutttonが押されたときに実行
 function colorChanged1() {
     let userSelection = getSelection();
@@ -377,19 +379,16 @@ function checkNode_I(node, range){
 function checkNode_U(node, range){
     let nodeRange = new Range();
     nodeRange.selectNode(node);
-    console.log(node);
 
     if(range.compareBoundaryPoints(Range.START_TO_START, nodeRange) <= 0 && range.compareBoundaryPoints(Range.END_TO_END, nodeRange) >= 0){
         if(node.nodeType == Node.TEXT_NODE){
             let span = document.createElement('span');
             node.parentNode.insertBefore(span, node);
             span.appendChild(node);
-            console.log(window.getComputedStyle(span).getPropertyValue('text-decoration'));
             if(span.style.textDecoration === "underline"){
                 span.style.textDecoration = "";
             }else{
                 span.style.textDecoration = "underline";
-                console.log(window.getComputedStyle(span).getPropertyValue('text-decoration'));
             }
         }else{
             if(node.style.textDecoration === "underline"){

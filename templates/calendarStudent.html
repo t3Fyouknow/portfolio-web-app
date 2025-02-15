@@ -3,84 +3,94 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>生徒用html</title>
+    <title>Student_app</title>
 
+    <link rel="stylesheet" href="../static/css/login.css">
     <link rel="stylesheet" href="../static/css/calendarStudent.css">
     <link rel="stylesheet" href="../static/css/hamburgerStudent.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
   </head>
   <body>
-      
-    <div>ユーザ名: <span id="ps">2A01</span></div>
-    <div id="container">
-      <div id="header">
-        <!-- 月の表示が行われるコンテナ -->
-        <div id="monthDisplay"></div>
-        <!-- BackとNextのボタンを表示 -->
-        <div>
-          <button id="backButton">前月</button>
-          <button id="nextButton">翌月</button>
+    <div id="screen1" class="active">
+      <h1>学生ログイン画面</h1>
+      <form id="login_form">
+        <div class="label_container">
+          <label id="login_label" for="user_id">学籍番号：</label>
+          <input type="text" id="user_id">
+        </div>
+        <button id=login_btn type="button" onclick="login()">ログイン</button>
+      </form>
+    </div>
+
+    <!-- 画面2（最初は隠す） -->
+    <div id="screen2">
+      <div>ユーザ名: <span id="ps">1A01</span></div><button id=logout_btn onclick="logout()">ログアウト</button>
+
+      <div id="container">
+        <div id="header">
+          <!-- 月の表示が行われるコンテナ -->
+          <div id="monthDisplay"></div>
+          <!-- BackとNextのボタンを表示 -->
+          <div>
+            <button id="backButton">前月</button>
+            <button id="nextButton">翌月</button>
+          </div>
+        </div>
+
+        <!-- 曜日を表示するコンテナ -->
+        <div id="weekdays">
+          <!-- 各曜日を表示 -->
+          <div id="Sun">日曜日</div>
+          <div>月曜日</div>
+          <div>火曜日</div>
+          <div>水曜日</div>
+          <div>木曜日</div>
+          <div>金曜日</div>
+          <div id="Sat">土曜日</div>
+        </div>
+
+        <!-- カレンダーの日付を表示するコンテナ -->
+        <div id="calendar">
         </div>
       </div>
 
-      <!-- 曜日を表示するコンテナ -->
-      <div id="weekdays">
-        <!-- 各曜日を表示 -->
-        <div id="Sun">日曜日</div>
-        <div>月曜日</div>
-        <div>火曜日</div>
-        <div>水曜日</div>
-        <div>木曜日</div>
-        <div>金曜日</div>
-        <div id="Sat">土曜日</div>
+      <div id="balloon">
       </div>
 
-      <!-- カレンダーの日付を表示するコンテナ -->
-      <div id="calendar">
       </div>
-    </div>
 
-    <div id="balloon">
-    </div>
-
-    <!--👇🍔👇　ハンバーガーメニュー-->
-    <div class="el_humburger">
-      <div class="el_humburger_wrapper">
-        <span class="el_humburger_bar top"></span>
-        <span class="el_humburger_bar middle"></span>
-        <span class="el_humburger_bar bottom">
-        </span>
-      </div>
-    </div>
-
-    <header class="navi">
-      <div class="navi_inner">
-        <div class="navi_item" id="ハンバーガー1"></div>
-        <div class="navi_item" id="ハンバーガー2"></div>
-        <div id="navi_selecter" id="ハンバーガー3">
-          <div class="form-select-wrap">
-            <select class="selectYear">
-            </select>
-            / 
-            <select class="selectMonth">
-            </select>
-            <!-- /
-            <select class="selectDay">
-            </select> -->
-        </div>
+      <!--👇🍔👇　ハンバーガーメニュー-->
+      <div class="el_humburger" id=humburger_btn >
+        <div class="el_humburger_wrapper">
+          <span class="el_humburger_bar top"></span>
+          <span class="el_humburger_bar middle"></span>
+          <span class="el_humburger_bar bottom">
+          </span>
         </div>
       </div>
-    </header>
-    <!--👆🍔👆 -->
 
-      
-    <!-- モーダルが表示された際に背後を覆う半透明な背景 -->
-    <div id="modalBackDrop"></div>
+      <header class="navi">
+        <div class="navi_inner">
+          <div class="navi_item" id="ハンバーガー1"></div>
+          <div class="navi_item" id="ハンバーガー2"></div>
+          <div id="navi_selecter" id="ハンバーガー3">
+            <div class="form-select-wrap">
+              <select class="selectYear">
+              </select>
+              <select class="selectMonth">
+              </select>
+          </div>
+          </div>
+        </div>
+      </header>
+      <!--👆🍔👆 -->
+        
+      <!-- モーダルが表示された際に背後を覆う半透明な背景 -->
+      <div id="modalBackDrop"></div>
     
+    <script src="../static/js/login.js"></script>
     <script src="../static/js/calendarStudent.js"></script>
     <script src="../static/js/hamburgerStudent.js"></script>
     <script src="../static/js/SelectYrMonthD8.js"></script>
-
   </body>
 </html>

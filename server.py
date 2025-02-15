@@ -22,19 +22,29 @@ def init_db():
             PRIMARY KEY (num, date, period)
         )
     ''')
+
+    conn.execute(''' 
+        CREATE TABLE IF NOT EXISTS attendance (
+            student_id VARCHAR(4),
+            date DATE,
+            period VARCHAR(5),
+            attendance_status VARCHAR(1),
+            time TIME,
+            PRIMARY KEY (student_id, date, period)
+        )
+    ''')
+
     conn.commit()
     conn.close()
 
-def get_schedule_data(user_id, month, year):
+def get_schedule_data(user_id):
     conn = sqlite3.connect('timetable.sqlite')
     schedule_cur = conn.cursor()
     attendance_cur = conn.cursor()
 
     if user_id[0] == '1':
-        # schedule_cur.execute("SELECT date, period, backgroundColor, decoration FROM timetable WHERE date LIKE ? AND num = 'one'", (f'{month}/%/{year}',))
         schedule_cur.execute("SELECT date, period, backgroundColor, decoration FROM timetable WHERE num = 'one'")
     else:
-        # schedule_cur.execute("SELECT date, period, backgroundColor, decoration FROM timetable WHERE date LIKE ? AND num = 'two'", (f'{month}/%/{year}',))
         schedule_cur.execute("SELECT date, period, backgroundColor, decoration FROM timetable WHERE num = 'two'")
     A = schedule_cur.fetchall()
     
@@ -116,9 +126,7 @@ def get_schedule():
 
     parts = data.split('|')
     user_id = parts[0]
-    month = parts[1]
-    year = parts[2]
-    A, B = get_schedule_data(user_id, month, year)
+    A, B = get_schedule_data(user_id)
     formatted_data = format_data(A, B)
     return formatted_data
 

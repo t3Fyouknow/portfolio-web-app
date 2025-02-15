@@ -138,6 +138,7 @@ a{
 
 .navi {
   position: fixed;
+  top: 0;
   will-change: transform;
   right:0;
   height: 100%;
@@ -152,16 +153,21 @@ a{
   -o-transition: all 600ms ease-out;
   transition: all 600ms ease-out;
   transform:translateZ(0) translateX(0%);
-  overflow: auto; }
+  overflow: auto; 
+}
+
+.js_humburgerOpen .navi {
+  width: 450px; 
+}
+@media screen and (max-width: 840px) {
+  .navi {
+    padding: 100px 0% 0; 
+  }
   .js_humburgerOpen .navi {
-width: 450px;
-   /*transform:translateZ(0) translateX(0%);*/ }
-    @media screen and (max-width: 840px) {
-      .navi {
-        padding: 100px 0% 0; }
-      .js_humburgerOpen .navi {
-padding: 100px 0% 0;
-        width: 100%;} }
+    padding: 100px 0% 0;
+    width: 100%;
+  } 
+}
 
 @media screen and (max-width: 840px){
 .navi_inner{
@@ -189,7 +195,7 @@ padding: 0 20px 0;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 1px;
+  height: 1.3px;
   background-color: #fff;
   transform: translate(-100%, 0);
   transition: transform cubic-bezier(0.215, 0.61, 0.355, 1) 0.4s;

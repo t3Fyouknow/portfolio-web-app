@@ -48,7 +48,6 @@ let contextmenu_function = () => {
 	event.preventDefault();
 }
 document.oncontextmenu = contextmenu_function;
-// HTML要素を取得し、それぞれの要素を対応する変数に格納している。
 const calendar = document.getElementById('calendar');
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const backDrop = document.getElementById('modalBackDrop');
@@ -279,8 +278,8 @@ const handleDrop = (e) => {
   // 転送データの取得
   const { id } = JSON.parse(e.dataTransfer.getData("application/json"));
 
-  //ctrlを押す　または　itemのｘ座標　> box1の左端のｘ座標  のときに複製
-  if (dragStartX > box1.getBoundingClientRect().left && dragStartY < holiday.getBoundingClientRect().bottom){ //event.ctrlKey ||  
+  //itemのｘ座標　> box1の左端のｘ座標  のときに複製
+  if (dragStartX > box1.getBoundingClientRect().left && dragStartY < holiday.getBoundingClientRect().bottom){  
     // 要素の複製
     const oldItem = document.getElementById(id);
     const newItem = oldItem.cloneNode(true);
@@ -317,22 +316,14 @@ const handleDrop = (e) => {
 // ↓↓↓tempDayのためだけのイベント
 const DragEnterForDay = (e) => {
   if(itemClass==="tempDay"){
-    // innerFlag = true;
     e.preventDefault();
     e.dataTransfer.dropEffect = "move";
-    // if ([...e.target.classList].includes("location") || [...e.target.classList].includes("item") || [...e.target.classList].includes("bigItem") || e.target.classList.length === 0) {
-    //   return;
-    // }
-    // e.target.classList.add("overForDay");
   }
 };
 
 const DragLeaveForDay = (e) => {
   if(itemClass==="tempDay"){
-    // if (innerFlag === false) {
-    //   //フラグがセットされていない場合、クラスを削除
-    //   e.target.classList.remove("overForDay");
-    // }
+
   }
 };
 
@@ -547,8 +538,6 @@ const DropForDay = (e) => {
       }
     });
   
-    // tempSubjLocation.addEventListener('dragstart', (e) => getInfo(dayString,e.target.id));
-    // tempSubjLocation.addEventListener('drop', () => registerDate(dayString)); 日にちを取得
     tempDay.appendChild(tempSubjLocation);
     tempDay.addEventListener("mousedown", getClass, false);
   }
@@ -1172,8 +1161,6 @@ function load() {
         holidayLocation.appendChild(holidayItem);
       }
 
-      // daySquare.addEventListener('click', () => openModal(dayString));
-      // daySquare.addEventListener('drop', () => registerDate(dayString));
     } else {
       daySquare.classList.add('padding');
     }
@@ -1273,7 +1260,6 @@ function load() {
     bigItem.addEventListener("dragstart", handleDragStart, false);
     bigItem.addEventListener("dragend", handleDragEnd, false);
     bigItem.addEventListener("mousedown", getClass, false);
-  
     //右クリックメニューを表示
     if(!bigItem.parentNode.parentNode.className.includes("fade")){
       bigItem.addEventListener('contextmenu',function (e){
@@ -1393,7 +1379,7 @@ function saveEvent() {
       document.getElementById(itemId).innerHTML = document.getElementById('eventTitleInput').innerHTML;
       document.getElementById(itemId).style.backgroundColor = document.getElementById('eventTitleInput').style.backgroundColor;
     }else{
-      if(targetDate === 'holiday'){
+      if(targetDate === 'holidaaaay'){
         holidayData.value = document.getElementById('eventTitleInput').innerText;
         holidayData.decoration = document.getElementById('eventTitleInput').innerHTML;
         holidayData.backgroundColor = document.getElementById('eventTitleInput').style.backgroundColor;
@@ -1671,7 +1657,7 @@ function parentLosesWeight(){
           ローカルストレージ.push({
             date: mouseup,
             period: reviveSubj.id,
-            id: g_drag_obj.id,
+            id: mouseup + "_" + reviveSubj.id.slice( 0,-1 ) + reviveSubj.id.slice( -1 ),
             value: g_drag_obj.innerText,
             decoration: g_drag_obj.innerHTML,
             backgroundColor: `${g_drag_obj.style.backgroundColor}`,

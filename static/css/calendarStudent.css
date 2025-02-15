@@ -1,6 +1,3 @@
-/* body 要素に対するスタイルを指定しています。display: flex; はフレキシブルボックスの表示方式を指定し、 */
-/* justify-content: center; は子要素を水平方向に中央寄せにします。 */
-/* margin-top: 50px; はページ上部の余白を指定しています。background-color: #FFFCFF; はページの背景色を設定しています。 */
 body {
   display: flex;
   margin-top: 50px;
@@ -8,11 +5,6 @@ body {
   background-color: #FFFCFF;
 }
 
-/* button 要素に対するスタイルを指定しています。width: 75px; はボタンの幅を指定し、 */
-/* cursor: pointer; はマウスがボタン上にあるときにカーソルが手の形になるようにします。 */
-/* box-shadow: 0px 0px 2px gray; はボタンに軽い影を追加し、border: none; はボーダー（枠線）を無効にします。 */
-/* outline: none; はフォーカス時のアウトラインを無効にします。padding: 5px; はボタン内の余白を指定し、 */
-/* border-radius: 5px; はボタンの角を丸くします。color: white; はテキストの色を白に指定しています。 */
 button{
   width: 75px;
   cursor: pointer;
@@ -24,10 +16,6 @@ button{
   color: white;
 }
 
-/* #header IDを持つ要素に対するスタイルを指定しています。 */
-/* padding: 10px; はヘッダー内部の余白を指定し、color: #d36c6c; はテキストの色を指定しています。 */
-/* font-size: 26px; はフォントサイズを指定し、font-family: sans-serif; はフォントファミリーを指定しています。 */
-/* display: flex; はフレキシブルボックスの表示方式を設定し、justify-content: space-between; は子要素を水平方向に均等に配置します。 */
 #header {
   padding: 10px;
   color: #d36c6c;
@@ -47,7 +35,7 @@ width: 1270px;/*元は770*/
   display: flex;
   color: #247BA0;
 }
-  /* #weekdays IDを持つ要素内の子要素である div 要素に対するスタイルを指定しています。width: 100px; は各曜日セルの幅を指定し、padding: 10px; はセル内の余白を指定しています。 */
+ 
 #weekdays div {
   width: 160px;
   padding: 10px;
@@ -59,14 +47,6 @@ width: 1270px;/*元は770*/
   flex-wrap: wrap;
 }
 
-/* .day クラスを持つ要素に対するスタイルを指定しています。 */
-/* .day クラスは日付セルに適用されます。width: 100px; と height: 100px; でセルの幅と高さを指定し、 */
-/* padding: 10px; でセル内の余白を設定しています。 */
-/* cursor: pointer; はマウスがセル上にあるときにカーソルが手の形になるようにします。 */
-/* box-sizing: border-box; は要素の全体のサイズにパディングやボーダーを含めるようにボックスモデルを調整します。 */
-/* background-color: white; でセルの背景色を白に設定し、box-shadow: 0px 0px 3px #CBD4C2; で軽い影を追加します。 */
-/* display: flex; でフレキシブルボックスの表示方式を設定し、flex-direction: column; で子要素を縦に並べるように設定しています。 */
-/* justify-content: space-between; は子要素の間隔を均等に設定します。 */
 .day {
   width: 100px;
   width: 170px;
@@ -86,12 +66,6 @@ width: 1270px;/*元は770*/
 .currentDay{
   box-shadow: 0px 0px 6px royalblue;
 }
-
-/* .event クラスを持つ要素に対するスタイルを指定しています。 */
-/* .event クラスはイベント表示に使用されます。font-size: 10px; でテキストのフォントサイズを指定し、 */
-/* padding: 3px; でテキストと周囲の余白を指定します。background-color: #58bae4; で背景色を設定し、 */
-/* color: white; でテキストの色を白に設定します。border-radius: 5px; で角を丸くし、 */
-/* max-height: 55px; と overflow: hidden; でイベント表示の最大高さを指定し、テキストがはみ出ることを防ぎます。 */
 .event {
   font-size: 10px;
   padding: 3px;
@@ -102,11 +76,6 @@ width: 1270px;/*元は770*/
   overflow: hidden;
 }
 
-
-/* .padding クラスを持つ要素に対するスタイルを指定しています。 */
-/* .padding クラスは、日付セル内で空白として表示されるセルに使用されます。 */
-/* cursor: default !important; はマウスカーソルを標準のカーソルに変更します。 */
-/* background-color: #FFFCFF !important; で背景色を設定し、box-shadow: none !important; で影を削除します。 */
 .padding {
   width: 170px;
   padding: 5px;
@@ -152,11 +121,6 @@ width: 1270px;/*元は770*/
   font-family: sans-serif;
 }
 
-/* #eventTitleInput IDを持つ入力フィールドに対するスタイルを指定しています。 */
-/* padding: 10px; で内部の余白を指定し、width: 100%; で幅を100%に設定します。 */
-/* box-sizing: border-box; はボックスモデルの調整を行い、margin-bottom: 25px; で下部の余白を指定します。 */
-/* border-radius: 3px; で角を丸くし、outline: none; でフォーカス時のアウトラインを削除します。 */
-/* border: none; でボーダー（枠線）を削除し、box-shadow: 0px 0px 3px gray; で軽い影を追加します。 */
 #eventTitleInput {
   font-family: 'Ms ゴシック', 'Osaka-等幅';
   margin: auto;
@@ -382,29 +346,6 @@ width: 1270px;/*元は770*/
   position: absolute;
   background-color: rgba(0,0,0,0.8);
 }
-
-/* ↓↓↓ドラッグアンドドロップのCSSコード 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 80vh;
-}*/
-
-/* .box {
-  width: 100%;
-  width: 170px;
-  padding: 5px;
-  height: 150px;
-  cursor: pointer;
-  box-sizing: border-box;
-  background-color: white;
-  margin: 5px;
-  box-shadow: 0px 0px 3px #CBD4C2;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  display: inline-block;
-} */
 
 #trashCan{
   padding-top: 300px;

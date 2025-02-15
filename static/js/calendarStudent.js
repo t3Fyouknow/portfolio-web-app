@@ -226,12 +226,9 @@ async function getFromServer(){
     return;
   }
 
-  let userData = document.getElementById("ps").innerText +  '|';
+  let userData = document.getElementById("ps").innerText;
   let monthDisplay = document.getElementById("monthDisplay").innerText;  //左上に表示されている月と年を取得(例:2月 2024)
-  let year = monthDisplay.slice(monthDisplay.indexOf(' ') + 1); //スペース以降の文字列を取得
-  let month = monthDisplay.slice(0,monthDisplay.indexOf('月')); //"月"より前の文字列を取得
 
-  userData += month + '|' + year
   //送信データ例userData:2A01_two_Feb
   //httpﾘｸｴｽﾄのｲﾝｽﾀﾝｽ化、ｸﾗｲｱﾝﾄ(js)<->ｻｰﾊﾞ(python)間で通信するためのｵﾌﾞｼﾞｪｸﾄ
   val = new XMLHttpRequest();
@@ -1823,6 +1820,6 @@ function displayPreNexDate(){
   }
 
 }
-getFromServer();
+// getFromServer();
 initButtons();
 load();
